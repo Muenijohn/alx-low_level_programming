@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * _disp - moves a string one place to the left and prints the string
+ * _print - moves a string one place to the left and prints the string
  * @str: string to move
  * @l: size of string
  *
  * Return: void
  */
-void _disp(char *str, int l)
+void _print(char *str, int l)
 {
 	int i, j;
 
@@ -17,11 +17,11 @@ void _disp(char *str, int l)
 		if (str[i] != '0')
 			j = 1;
 		if (j || i == l - 1)
-			putchar(str[i]);
+			_putchar(str[i]);
 		i++;
 	}
 
-	putchar('\n');
+	_putchar('\n');
 	free(str);
 }
 
@@ -61,12 +61,12 @@ char *mul(char n, char *num, int num_index, char *dest, int dest_index)
 	return (dest);
 }
 /**
- * _is_digit - checks the arguments to ensure they are digits
+ * check_for_digits - checks the arguments to ensure they are digits
  * @av: pointer to arguments
  *
  * Return: 0 if digits, 1 if not
  */
-int _is_digit(char **av)
+int check_for_digits(char **av)
 {
 	int i, j;
 
@@ -80,7 +80,6 @@ int _is_digit(char **av)
 	}
 	return (0);
 }
-
 /**
  * init - initializes a string
  * @str: sting to initialize
@@ -94,7 +93,7 @@ void init(char *str, int l)
 
 	for (i = 0; i < l; i++)
 		str[i] = '0';
-	str[i] = END;
+	str[i] = '\0';
 }
 
 /**
@@ -111,10 +110,10 @@ int main(int argc, char *argv[])
 	char *t;
 	char e[] = "Error\n";
 
-	if (argc != 3 || _is_digit(argv))
+	if (argc != 3 || check_for_digits(argv))
 	{
-		for (ti = 0; e[ti]; ti++);
-			putchar(e[ti]);
+		for (ti = 0; e[ti]; ti++)
+			_putchar(e[ti]);
 		exit(98);
 	}
 	for (l1 = 0; argv[1][l1]; l1++)
@@ -123,24 +122,24 @@ int main(int argc, char *argv[])
 		;
 	ln = l1 + l2 + 1;
 	a = malloc(ln * sizeof(char));
-	if (!a)
+	if (a == NULL)
 	{
 		for (ti = 0; e[ti]; ti++)
-			putchar(e[ti]);
+			_putchar(e[ti]);
 		exit(98);
 	}
 	init(a, ln - 1);
 	for (ti = l2 - 1, i = 0; ti >= 0; ti--, i++)
 	{
 		t = mul(argv[2][ti], argv[1], l1 - 1, a, (ln - 2) - i);
-		if (!t)
+		if (t == NULL)
 		{
 			for (ti = 0; e[ti]; ti++)
-				putchar(e[ti]);
+				_putchar(e[ti]);
 			free(a);
 			exit(98);
 		}
 	}
-	_disp(a, ln - 1);
+	_print(a, ln - 1);
 	return (0);
 }
