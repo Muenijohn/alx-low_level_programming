@@ -14,11 +14,12 @@
 int _strlen(const char *)
 {
 	int i = 0;
+
 	while (s[i])
+
 		i++;
 
-			return (i);
-
+	return (i);
 }
 /**
  *
@@ -37,6 +38,7 @@ unsigned int binary_to_uint(const char *b)
 {
 	unsigned int n = 0;
 	int i, len;
+
 	if (b == NULL)
 
 		return (0);
